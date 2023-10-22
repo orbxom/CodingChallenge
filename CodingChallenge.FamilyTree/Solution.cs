@@ -6,31 +6,31 @@ namespace CodingChallenge.FamilyTree
 {
     public class Solution
     {
+        /// <summary>
+        /// Performs a breadth first search to find the birth month of a descendant.
+        /// </summary>
+        /// <param name="person">Root node of family tree.</param>
+        /// <param name="descendantName">Name of descendant to find.</param>
+        /// <returns>Month of birth of descendant if found. Empty string if not found.</returns>
         public string GetBirthMonth(Person person, string descendantName)
         {
             var queue = new Queue<Person>();
             queue.Enqueue(person);
 
-            Person? descendant = null;
-            var processed = 0;
+            Person descendant = null;
 
-            var names = new List<string>();
 
             while (queue.Count > 0)
             {
                 var currentPerson = queue.Dequeue();
-                names.Add(currentPerson.Name);
-                processed++;
                 currentPerson.Descendants.ForEach(x => queue.Enqueue(x));
 
                 if (currentPerson.Name == descendantName)
                 {
                     descendant = currentPerson;
+                    break;
                 }
             }
-
-            Console.WriteLine($"Processed: {processed}");
-            names = names.OrderBy(x => x).ToList();
 
             if (descendant != null)
             {
@@ -38,7 +38,7 @@ namespace CodingChallenge.FamilyTree
             }
             else
             {
-                return "";
+                return string.Empty;
             }
         }
     }
