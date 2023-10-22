@@ -17,9 +17,7 @@ namespace CodingChallenge.FamilyTree.Tests
                 .With(h => h.MaximumChildren = 4)
                 .With(h => h.NumberOfRoots = 1).Build();
 
-            var person = Builder<Person>.CreateListOfSize(5461).BuildHierarchy(hierarchySpec).First();
-
-            return person;
+            return Builder<Person>.CreateListOfSize(5461).BuildHierarchy(hierarchySpec).First();
         }
     }
 }
